@@ -7,7 +7,7 @@ use ivol\ExecParams;
 use ivol\ExecutionWrapper;
 use ivol\Result;
 
-class ExecuteTest extends PHPUnit_Framework_TestCase
+class ExecutionWrapperTest extends PHPUnit_Framework_TestCase
 {
     /** @var ExecutionWrapper */
     private $sut;
