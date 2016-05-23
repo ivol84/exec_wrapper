@@ -4,12 +4,12 @@ Execution wrapper is extension implements execution of external application in O
 
 Installation
 ------------
-** Will be added soon **
+**Will be added soon**
 
 Usage
 -----
 It is really simple:
-'''
+```
 <php>
 // Autoload here
 use ivol/ExecutionWrapper;
@@ -23,15 +23,15 @@ if ($result->getReturnCode() == 0) {
 }
 echo($result->getOutput());
 </php>
-'''
+```
 If you want to use Event System then you should configure event dispatcher:
-'''
+```
 ...
 $dispatcher = $wrapper->getEventDispatcher();
 $dispatcher->addSubscriber(...);
 $dispatcher->addListener(...);
 ...
-'''
+```
 For more information about event dispatcher see [The EventDispatcher Component](http://symfony.com/doc/3.0/components/event_dispatcher/introduction.html).
 For additional examples see [ExecutionWrapperIntegrationTest](https://github.com/ivol84/exec_wrapper/blob/master/test/ExecutionWrapperIntegrationTest.php).
 
