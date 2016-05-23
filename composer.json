@@ -1,0 +1,12 @@
+{
+  "name": "ivol/exec_wrapper",
+  "description": "Allows to execute applications from command line.",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Dzmitry Shalukhau",
+      "email": "ivol84@gmail.com"
+    }
+  ]
+}
