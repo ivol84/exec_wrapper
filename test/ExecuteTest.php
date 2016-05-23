@@ -1,7 +1,8 @@
 <?php
 
-use ivol\AfterListener;
-use ivol\BeforeListener;
+use Composer\EventDispatcher\Event;
+use ivol\EventDispatcher\AfterExecuteEvent;
+use ivol\EventDispatcher\BeforeExecuteEvent;
 use ivol\ExecParams;
 use ivol\ExecutionWrapper;
 use ivol\Result;
@@ -16,58 +17,51 @@ class ExecuteTest extends PHPUnit_Framework_TestCase
         $this->sut = new ExecutionWrapper();
     }
 
-    public function testExecuteReturnsReturnCode()
+    public function testExecuteReturnsReturnResult()
     {
         $result = $this->sut->exec('echo %s', array('123'));
 
         $this->assertEquals(0, $result->getReturnCode());
-    }
-
-    public function testExecuteReturnsOutput()
-    {
-        $result = $this->sut->exec('echo %s', array('123'));
-
         $this->assertEquals('123', $result->getOutput());
     }
 
-    public function testExecuteCallsListenerBeforeRunningApplication()
+    public function testExecuteNotifyBeforeAndAfterExecute()
     {
-        $obeserver = $this->getMock('TestListener');
-        $params = new ExecParams('echo %s', array('123'));
-        $obeserver->expects($this->once())->method('before')->with($params)->will($this->returnValue($params));
-        $this->sut->addObserver($obeserver);
-        
-        $this->sut->exec('echo %s', array('123'));
-    }
-
-    public function testExecuteCallsListenerAfterRunningApplication()
-    {
-        $obeserver = $this->getMock('TestListener');
-        $obeserver->expects($this->any())->method('before')->will($this->returnValue(new ExecParams('echo %s', array('123'))));
-        $result = new Result(0, array('123'));
-        $obeserver->expects($this->once())->method('after')->with($result)->will($this->returnValue($result));
-        $this->sut->addObserver($obeserver);
+        $eventListener = new TestListener();
+        $this->sut->getEventDispatcher()->addListener(BeforeExecuteEvent::EVENT_NAME, array($eventListener, 'before'));
+        $this->sut->getEventDispatcher()->addListener(AfterExecuteEvent::EVENT_NAME, array($eventListener, 'after'));
 
         $this->sut->exec('echo %s', array('123'));
+
+        $actualEvents = $eventListener->getEvents();
+        $this->assertCount(2, $actualEvents);
+        $this->assertInstanceOf('ivol\EventDispatcher\BeforeExecuteEvent', $actualEvents[0]);
+        $this->assertEquals(new ExecParams('echo %s', array('123')), $actualEvents[0]->getParams());
+        $this->assertInstanceOf('ivol\EventDispatcher\AfterExecuteEvent', $actualEvents[1]);
+        $this->assertEquals(new Result(0 , array('123')), $actualEvents[1]->getResult());
     }
 }
 
-class TestListener implements BeforeListener, AfterListener
+class TestListener
 {
-
     /**
-     * @param Result $result
-     * @return Result
+     * @var Event[]
      */
-    public function after(Result $result)
-    {
+    private $events = array();
+
+    public function before(BeforeExecuteEvent $event) {
+        $this->events[] = $event;
+    }
+
+    public function after(AfterExecuteEvent $event) {
+        $this->events[] = $event;
     }
 
     /**
-     * @param ExecParams $params
-     * @return ExecParams
+     * @return \Composer\EventDispatcher\Event[]
      */
-    public function before(ExecParams $params)
+    public function getEvents()
     {
+        return $this->events;
     }
 }
