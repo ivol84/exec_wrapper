@@ -33,6 +33,7 @@ $dispatcher->addListener(...);
 ...
 ```
 For more information about event dispatcher see [The EventDispatcher Component](http://symfony.com/doc/3.0/components/event_dispatcher/introduction.html).
+
 For additional examples see [ExecutionWrapperIntegrationTest](https://github.com/ivol84/exec_wrapper/blob/master/test/ExecutionWrapperIntegrationTest.php).
 
 License
