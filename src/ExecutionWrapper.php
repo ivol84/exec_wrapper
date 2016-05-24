@@ -11,8 +11,6 @@ class ExecutionWrapper
      * @var EventDispatcher
      */
     private $eventDispatcher;
-    /** @var array */
-    private $observers = array();
 
     public function __construct()
     {
