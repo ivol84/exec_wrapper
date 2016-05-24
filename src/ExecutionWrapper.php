@@ -17,9 +17,9 @@ class ExecutionWrapper
     /**
      * @param array $config
      */
-    public function __construct($config = null)
+    public function __construct($config = array())
     {
-        $this->config = $config ? : ConfigurationFactory::createFromArray();
+        $this->config = ConfigurationFactory::createFromArray($config);
         $this->eventDispatcher = new EventDispatcher();
     }
 

@@ -37,7 +37,7 @@ class ExecutionWrapperTest extends PHPUnit_Framework_TestCase
 
     public function testExecuteDoesntEscapesCmdWithConfig()
     {
-        $this->sut = new ExecutionWrapper(ConfigurationFactory::createFromArray(['escape_shell_cmd' => false]));
+        $this->sut = new ExecutionWrapper(['escape_shell_cmd' => false]);
         $result = $this->sut->exec('echo ? %s', array("'"));
 
         $this->assertEquals(0, $result->getReturnCode());

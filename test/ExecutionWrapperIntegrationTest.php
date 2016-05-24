@@ -7,27 +7,17 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class ExecutionWrapperIntegrationTest extends PHPUnit_Framework_TestCase
 {
-    public function testExecure()
+    public function testExecuteSubscriber()
     {
         $sut = new ExecutionWrapper();
         $profiler = new TimeProfilerSubscriber();
         $sut->getEventDispatcher()->addSubscriber($profiler);
-        $sut->getEventDispatcher()->addListener(BeforeExecuteEvent::EVENT_NAME, array($this, 'escapeArgs'));
 
         $result = $sut->exec('echo %s', array("'123'"));
 
-        $this->assertEquals('\'123\'', $result->getOutput());
         $this->assertTrue($profiler->getProfiledTimestamp() > 0);
     }
 
-    public function escapeArgs(BeforeExecuteEvent $event) {
-        $params = $event->getParams();
-        $escapedArgs = array();
-        foreach ($params->getParams() as $param) {
-            $escapedArgs[] = escapeshellarg($param);
-        }
-        $event->setParams(new ExecParams($params->getCommand(), $escapedArgs));
-    }
 }
 
 class TimeProfilerSubscriber implements EventSubscriberInterface
