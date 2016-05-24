@@ -36,6 +36,12 @@ For more information about event dispatcher see [The EventDispatcher Component](
 
 For additional examples see [ExecutionWrapperIntegrationTest](https://github.com/ivol84/exec_wrapper/blob/master/test/ExecutionWrapperIntegrationTest.php).
 
+Configuration:
+-------
+You can configure behaviour of args and command escaping by passing config array to ExecWrapper.
+
+For configuration option names please see [ExecWrapperConfiguration](https://github.com/ivol84/exec_wrapper/blob/master/src/Config/ExecWrapperConfiguration.php).
+
 License
 -------
 

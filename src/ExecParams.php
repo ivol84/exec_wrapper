@@ -1,6 +1,7 @@
 <?php
-
 namespace ivol;
+
+use ivol\Config\ConfigurationFactory;
 
 class ExecParams
 {
@@ -10,6 +11,8 @@ class ExecParams
     private $command;
     /** @var  array */
     private $params;
+    /** @var  array */
+    private $config;
 
     /**
      * @param $command
@@ -19,6 +22,7 @@ class ExecParams
     {
         $this->command = $command;
         $this->params = $params;
+        $this->config = ConfigurationFactory::createFromArray();
     }
 
     /**
@@ -34,15 +38,32 @@ class ExecParams
      */
     public function getParams()
     {
-        return $this->params;
+        return $this->config['escape_shell_args'] ? $this->getEscapedParams() : $this->params;
     }
 
     /**
      * @return string
      */
     public function getFullCommand() {
-        $params = $this->params;
+        $params = $this->getParams();
         array_unshift($params, $this->command);
-        return call_user_func_array('sprintf', $params);
+        $command = call_user_func_array('sprintf', $params);
+        return $this->config['escape_shell_cmd'] ? escapeshellcmd($command) : $command;
+    }
+
+    /**
+     * @param array $config
+     */
+    public function setConfig($config)
+    {
+        $this->config = $config;
+    }
+
+    private function getEscapedParams() {
+        $escapedArgs = array();
+        foreach ($this->params as $param) {
+            $escapedArgs[] = escapeshellarg($param);
+        }
+        return $escapedArgs;
     }
 }

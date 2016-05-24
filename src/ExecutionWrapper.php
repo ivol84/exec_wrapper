@@ -1,21 +1,25 @@
 <?php
 namespace ivol;
 
+use ivol\Config\ConfigurationFactory;
 use ivol\EventDispatcher\AfterExecuteEvent;
 use ivol\EventDispatcher\BeforeExecuteEvent;
+use ivol\EventDispatcher\EscapeArgsSubscriber;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class ExecutionWrapper
 {
-    /**
-     * @var EventDispatcher
-     */
+    /** @var array  */
+    private $config;
+    /** @var EventDispatcher */
     private $eventDispatcher;
-    /** @var array */
-    private $observers = array();
 
-    public function __construct()
+    /**
+     * @param array $config
+     */
+    public function __construct($config = array())
     {
+        $this->config = ConfigurationFactory::createFromArray($config);
         $this->eventDispatcher = new EventDispatcher();
     }
 
@@ -34,7 +38,9 @@ class ExecutionWrapper
      */
     public function exec($command, $params)
     {
-        $beforeExecuteEvent = new BeforeExecuteEvent(new ExecParams($command, $params));
+        $execParams = new ExecParams($command, $params);
+        $execParams->setConfig($this->config);
+        $beforeExecuteEvent = new BeforeExecuteEvent($execParams);
         $this->eventDispatcher->dispatch(BeforeExecuteEvent::EVENT_NAME, $beforeExecuteEvent);
         exec($beforeExecuteEvent->getParams()->getFullCommand(), $output, $returnValue);
         $afterExecuteEvent = new AfterExecuteEvent(new Result($returnValue, $output));

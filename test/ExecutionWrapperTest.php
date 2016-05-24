@@ -1,6 +1,7 @@
 <?php
 
 use Composer\EventDispatcher\Event;
+use ivol\Config\ConfigurationFactory;
 use ivol\EventDispatcher\AfterExecuteEvent;
 use ivol\EventDispatcher\BeforeExecuteEvent;
 use ivol\ExecParams;
@@ -17,12 +18,30 @@ class ExecutionWrapperTest extends PHPUnit_Framework_TestCase
         $this->sut = new ExecutionWrapper();
     }
 
-    public function testExecuteReturnsReturnResult()
+    public function testExecuteReturnsResult()
     {
         $result = $this->sut->exec('echo %s', array('123'));
 
         $this->assertEquals(0, $result->getReturnCode());
         $this->assertEquals('123', $result->getOutput());
+    }
+
+    public function testExecuteEscapesDataByDefault()
+    {
+        $this->sut = new ExecutionWrapper();
+        $result = $this->sut->exec('echo ? %s', array("'"));
+
+        $this->assertEquals(0, $result->getReturnCode());
+        $this->assertEquals("? \'", $result->getOutput());
+    }
+
+    public function testExecuteDoesntEscapesCmdWithConfig()
+    {
+        $this->sut = new ExecutionWrapper(['escape_shell_cmd' => false]);
+        $result = $this->sut->exec('echo ? %s', array("'"));
+
+        $this->assertEquals(0, $result->getReturnCode());
+        $this->assertEquals("? '", $result->getOutput());
     }
 
     public function testExecuteNotifyBeforeAndAfterExecute()
