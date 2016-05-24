@@ -10,5 +10,5 @@
         stopOnSkipped="false"
         stopOnRisky="false"
         verbose="true"
-        bootstrap="bootstrap.php">
+        bootstrap="test/bootstrap.php">
 </phpunit>
