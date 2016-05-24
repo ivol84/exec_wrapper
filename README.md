@@ -1,7 +1,7 @@
 exec-wrapper
 ============
 
-[![Build Status](https://travis-ci.org/ivol84/exec_wrapper.svg?branch=master)](https://travis-ci.org/ivol84/exec_wrapper.svg?branch=master)
+[![Build Status](https://travis-ci.org/ivol84/exec_wrapper.svg?branch=master)](https://travis-ci.org/ivol84/exec_wrapper)
 
 Execution wrapper is extension implements execution of external application in OOP way. Also allows to add listener before and after execution.
 

@@ -13,6 +13,7 @@
     "psr-4": {"ivol\\": "src/"}
   },
   "require": {
+    "php": ">=5.4.0",
     "symfony/event-dispatcher": "v2.8.*",
     "symfony/config": "v2.8.*"
   },
