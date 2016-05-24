@@ -7,7 +7,6 @@ use Symfony\Component\Config\Definition\Processor;
 
 class ConfigurationFactory
 {
-
     public static function createFromArray($params = array())
     {
         $processor = new Processor();
