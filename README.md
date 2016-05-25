@@ -1,7 +1,9 @@
 exec-wrapper
 ============
-
+[![Latest Stable Version](https://poser.pugx.org/ivol/exec-wrapper/v/stable)](https://packagist.org/packages/ivol/exec-wrapper)
 [![Build Status](https://travis-ci.org/ivol84/exec_wrapper.svg?branch=master)](https://travis-ci.org/ivol84/exec_wrapper)
+[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/ivol84/exec_wrapper/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ivol84/exec_wrapper/)
+[![Total Downloads](https://poser.pugx.org/ivol/exec-wrapper/downloads)](https://packagist.org/packages/ivol/exec-wrapper)
 
 Execution wrapper is extension implements execution of external application in OOP way. Also allows to add listener before and after execution.
 
