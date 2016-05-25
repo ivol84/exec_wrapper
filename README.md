@@ -7,7 +7,11 @@ Execution wrapper is extension implements execution of external application in O
 
 Installation
 ------------
-**Will be added soon**
+Add exec-wrapper to your [Composer](https://getcomposer.org/doc/00-intro.md) project:
+
+```bash
+composer require ivol/exec-wrapper
+```
 
 Usage
 -----
