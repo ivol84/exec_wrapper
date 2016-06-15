@@ -10,10 +10,8 @@ build:
             -
                 command: 'vendor/bin/phpunit'
                 coverage:
-                    file: 'build/logs/clover.xml'
-                    format: 'php-clover'
-
-
+                    file: 'clover.xml'
+                    format: php-clover
 tools:
     php_mess_detector:
         filter:
