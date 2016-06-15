@@ -4,16 +4,14 @@ filter:
 build:
     dependencies:
         override:
-            - 'composer install --dev --no-interaction'
+            - 'composer install --no-interaction'
     tests:
         override:
             -
-                command: 'vendor/bin/phpunit'
+                command: 'vendor/bin/phpunit --coverage-clover=clover.xml -c phpunit.xml.dist test/src'
                 coverage:
-                    file: 'build/logs/clover.xml'
-                    format: 'php-clover'
-
-
+                    file: clover.xml
+                    format: php-clover
 tools:
     php_mess_detector:
         filter:
@@ -27,9 +25,7 @@ tools:
         test_command: vendor/bin/phpunit
         filter:
             excluded_paths: ['vendor/*']
-    php_cpd:
-        filter:
-            excluded_paths: ['vendor/*']
+    php_cpd: false
     php_pdepend:
         excluded_dirs:
             1: vendor

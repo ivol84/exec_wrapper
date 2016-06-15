@@ -2,6 +2,7 @@ exec-wrapper
 ============
 [![Latest Stable Version](https://poser.pugx.org/ivol/exec-wrapper/v/stable)](https://packagist.org/packages/ivol/exec-wrapper)
 [![Build Status](https://travis-ci.org/ivol84/exec_wrapper.svg?branch=master)](https://travis-ci.org/ivol84/exec_wrapper)
+[![Code Coverage](https://scrutinizer-ci.com/g/ivol84/exec_wrapper/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/ivol84/exec_wrapper/?branch=master)
 [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/ivol84/exec_wrapper/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ivol84/exec_wrapper/)
 [![Total Downloads](https://poser.pugx.org/ivol/exec-wrapper/downloads)](https://packagist.org/packages/ivol/exec-wrapper)
 
