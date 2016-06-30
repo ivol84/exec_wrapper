@@ -1,25 +1,25 @@
 <?php
 namespace ivol\EventDispatcher;
 
-use ivol\Result;
+use ivol\ExecutionResult;
 use Symfony\Component\EventDispatcher\Event;
 
 class AfterExecuteEvent extends Event
 {
     const EVENT_NAME = 'exec-wrapper.after_execute';
-    /** @var  Result */
+    /** @var  ExecutionResult */
     private $result;
 
     /**
-     * @param Result $result
+     * @param ExecutionResult $result
      */
-    public function __construct(Result $result)
+    public function __construct(ExecutionResult $result)
     {
         $this->result = $result;
     }
 
     /**
-     * @return Result
+     * @return ExecutionResult
      */
     public function getResult()
     {
@@ -27,7 +27,7 @@ class AfterExecuteEvent extends Event
     }
 
     /**
-     * @param Result $result
+     * @param ExecutionResult $result
      */
     public function setResult($result)
     {

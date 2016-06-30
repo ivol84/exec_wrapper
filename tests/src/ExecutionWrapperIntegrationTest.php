@@ -1,11 +1,13 @@
 <?php
+namespace ivol\tests;
+
 use ivol\EventDispatcher\AfterExecuteEvent;
 use ivol\EventDispatcher\BeforeExecuteEvent;
-use ivol\ExecParams;
+use ivol\ExecutionContext;
 use ivol\ExecutionWrapper;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class ExecutionWrapperIntegrationTest extends PHPUnit_Framework_TestCase
+class ExecutionWrapperIntegrationTest extends \PHPUnit_Framework_TestCase
 {
     public function testExecuteSubscriber()
     {

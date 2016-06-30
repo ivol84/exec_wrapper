@@ -1,16 +1,17 @@
 <?php
+namespace ivol\tests;
 
 use ivol\Config\ConfigurationFactory;
-use ivol\ExecParams;
+use ivol\ExecutionContext;
 
-class ExecParamsTest  extends PHPUnit_Framework_TestCase
+class ExecutionContextTest  extends \PHPUnit_Framework_TestCase
 {
-    /** @var  ExecParams */
+    /** @var  ExecutionContext */
     private $sut;
 
     protected function setUp()
     {
-        $this->sut = new ExecParams('echo ? %s', array("'123"));
+        $this->sut = new ExecutionContext('echo ? %s', array("'123"));
     }
 
     public function testGetParamsReturnsEscapedParamsByDefault()

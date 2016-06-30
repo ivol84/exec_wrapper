@@ -1,8 +1,9 @@
 <?php
+namespace ivol\tests\Config;
 
 use ivol\Config\ConfigurationFactory;
 
-class ConfigurationFactoryTest extends PHPUnit_Framework_TestCase
+class ConfigurationFactoryTest extends \PHPUnit_Framework_TestCase
 {
     public function testCreateFromArrayReturnsConfigurationByDefaultOnEmptyConfig()
     {

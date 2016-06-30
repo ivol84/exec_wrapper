@@ -34,16 +34,16 @@ class ExecutionWrapper
     /**
      * @param string $command Sprintf formatted string @see http://php.net/manual/en/function.sprintf.php
      * @param array $params
-     * @return Result
+     * @return ExecutionResult
      */
     public function exec($command, $params)
     {
-        $execParams = new ExecParams($command, $params);
+        $execParams = new ExecutionContext($command, $params);
         $execParams->setConfig($this->config);
         $beforeExecuteEvent = new BeforeExecuteEvent($execParams);
         $this->eventDispatcher->dispatch(BeforeExecuteEvent::EVENT_NAME, $beforeExecuteEvent);
         exec($beforeExecuteEvent->getParams()->getFullCommand(), $output, $returnValue);
-        $afterExecuteEvent = new AfterExecuteEvent(new Result($returnValue, $output));
+        $afterExecuteEvent = new AfterExecuteEvent(new ExecutionResult($returnValue, $output));
         $this->eventDispatcher->dispatch(AfterExecuteEvent::EVENT_NAME, $afterExecuteEvent);
         return $afterExecuteEvent->getResult();
     }

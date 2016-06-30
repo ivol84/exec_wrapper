@@ -10,7 +10,11 @@
     }
   ],
   "autoload": {
-    "psr-4": {"ivol\\": "src/"}
+    "psr-4":
+    {
+      "ivol\\": "src/",
+      "ivol\\tests\\": "tests/src/"
+    }
   },
   "require": {
     "php": ">=5.4.0",

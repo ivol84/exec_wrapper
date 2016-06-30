@@ -1,7 +1,7 @@
 <?php
 namespace ivol;
 
-class Result
+class ExecutionResult
 {
     /** @var array */
     private $output;
@@ -10,6 +10,7 @@ class Result
 
     /**
      * @param int $returnCode
+     * @param string $output
      */
     public function __construct($returnCode, $output)
     {
@@ -24,7 +25,6 @@ class Result
     {
         return $this->output ? implode('\n', $this->output): '';
     }
-
 
     /**
      * @return int

@@ -10,5 +10,17 @@
         stopOnSkipped="false"
         stopOnRisky="false"
         verbose="true"
-        bootstrap="test/bootstrap.php">
+        bootstrap="tests/bootstrap.php">
+    <testsuites>
+        <testsuite name="main">
+            <directory>./tests/src/</directory>
+        </testsuite>
+    </testsuites>
+
+    <!-- Whitelist for code coverage -->
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./src/</directory>
+        </whitelist>
+    </filter>
 </phpunit>
