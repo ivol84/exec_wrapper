@@ -3,7 +3,7 @@ namespace ivol;
 
 use ivol\Config\ConfigurationFactory;
 
-class ExecParams
+class ExecutionContext
 {
     /**
      * @var string Sprintf formatted string @see http://php.net/manual/en/function.sprintf.php
@@ -15,8 +15,8 @@ class ExecParams
     private $config;
 
     /**
-     * @param $command
-     * @param $params
+     * @param string $command
+     * @param array $params
      */
     public function __construct($command, $params)
     {
@@ -26,7 +26,7 @@ class ExecParams
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getCommand()
     {
@@ -59,6 +59,9 @@ class ExecParams
         $this->config = $config;
     }
 
+    /**
+     * @return array
+     */
     private function getEscapedParams() {
         $escapedArgs = array();
         foreach ($this->params as $param) {

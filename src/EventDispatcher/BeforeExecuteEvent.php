@@ -3,25 +3,25 @@
 namespace ivol\EventDispatcher;
 
 
-use ivol\ExecParams;
+use ivol\ExecutionContext;
 use Symfony\Component\EventDispatcher\Event;
 
 class BeforeExecuteEvent extends Event
 {
     const EVENT_NAME = 'exec-wrapper.before_execute';
-    /** @var ExecParams */
+    /** @var ExecutionContext */
     private $params;
 
     /**
-     * @param ExecParams $params
+     * @param ExecutionContext $params
      */
-    public function __construct(ExecParams $params)
+    public function __construct(ExecutionContext $params)
     {
         $this->params = $params;
     }
 
     /**
-     * @return ExecParams
+     * @return ExecutionContext
      */
     public function getParams()
     {
@@ -29,7 +29,7 @@ class BeforeExecuteEvent extends Event
     }
 
     /**
-     * @param ExecParams $params
+     * @param ExecutionContext $params
      */
     public function setParams($params)
     {

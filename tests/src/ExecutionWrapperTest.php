@@ -5,9 +5,9 @@ use Composer\EventDispatcher\Event;
 use ivol\Config\ConfigurationFactory;
 use ivol\EventDispatcher\AfterExecuteEvent;
 use ivol\EventDispatcher\BeforeExecuteEvent;
-use ivol\ExecParams;
+use ivol\ExecutionContext;
 use ivol\ExecutionWrapper;
-use ivol\Result;
+use ivol\ExecutionResult;
 
 class ExecutionWrapperTest extends \PHPUnit_Framework_TestCase
 {
@@ -56,9 +56,9 @@ class ExecutionWrapperTest extends \PHPUnit_Framework_TestCase
         $actualEvents = $eventListener->getEvents();
         $this->assertCount(2, $actualEvents);
         $this->assertInstanceOf('ivol\EventDispatcher\BeforeExecuteEvent', $actualEvents[0]);
-        $this->assertEquals(new ExecParams('echo %s', array('123')), $actualEvents[0]->getParams());
+        $this->assertEquals(new ExecutionContext('echo %s', array('123')), $actualEvents[0]->getParams());
         $this->assertInstanceOf('ivol\EventDispatcher\AfterExecuteEvent', $actualEvents[1]);
-        $this->assertEquals(new Result(0 , array('123')), $actualEvents[1]->getResult());
+        $this->assertEquals(new ExecutionResult(0 , array('123')), $actualEvents[1]->getResult());
     }
 }
 
