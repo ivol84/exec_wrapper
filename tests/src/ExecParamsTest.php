@@ -1,9 +1,10 @@
 <?php
+namespace ivol\tests;
 
 use ivol\Config\ConfigurationFactory;
 use ivol\ExecParams;
 
-class ExecParamsTest  extends PHPUnit_Framework_TestCase
+class ExecParamsTest  extends \PHPUnit_Framework_TestCase
 {
     /** @var  ExecParams */
     private $sut;
