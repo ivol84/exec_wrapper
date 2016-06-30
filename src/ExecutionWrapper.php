@@ -43,6 +43,7 @@ class ExecutionWrapper
         $beforeExecuteEvent = new BeforeExecuteEvent($execParams);
         $this->eventDispatcher->dispatch(BeforeExecuteEvent::EVENT_NAME, $beforeExecuteEvent);
         exec($beforeExecuteEvent->getParams()->getFullCommand(), $output, $returnValue);
+        $output = $output ?: array();
         $afterExecuteEvent = new AfterExecuteEvent(new ExecutionResult($returnValue, $output));
         $this->eventDispatcher->dispatch(AfterExecuteEvent::EVENT_NAME, $afterExecuteEvent);
         return $afterExecuteEvent->getResult();

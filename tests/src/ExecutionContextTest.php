@@ -4,7 +4,7 @@ namespace ivol\tests;
 use ivol\Config\ConfigurationFactory;
 use ivol\ExecutionContext;
 
-class ExecutionContextTest  extends \PHPUnit_Framework_TestCase
+class ExecutionContextTest extends \PHPUnit_Framework_TestCase
 {
     /** @var  ExecutionContext */
     private $sut;

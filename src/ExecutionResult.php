@@ -10,7 +10,7 @@ class ExecutionResult
 
     /**
      * @param int $returnCode
-     * @param string $output
+     * @param array $output
      */
     public function __construct($returnCode, $output)
     {
