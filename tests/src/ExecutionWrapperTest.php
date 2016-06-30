@@ -8,6 +8,7 @@ use ivol\EventDispatcher\BeforeExecuteEvent;
 use ivol\ExecutionContext;
 use ivol\ExecutionWrapper;
 use ivol\ExecutionResult;
+use ivol\tests\Helper\TestListener;
 
 class ExecutionWrapperTest extends \PHPUnit_Framework_TestCase
 {
@@ -58,30 +59,6 @@ class ExecutionWrapperTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('ivol\EventDispatcher\BeforeExecuteEvent', $actualEvents[0]);
         $this->assertEquals(new ExecutionContext('echo %s', array('123')), $actualEvents[0]->getParams());
         $this->assertInstanceOf('ivol\EventDispatcher\AfterExecuteEvent', $actualEvents[1]);
-        $this->assertEquals(new ExecutionResult(0 , array('123')), $actualEvents[1]->getResult());
-    }
-}
-
-class TestListener
-{
-    /**
-     * @var Event[]
-     */
-    private $events = array();
-
-    public function before(BeforeExecuteEvent $event) {
-        $this->events[] = $event;
-    }
-
-    public function after(AfterExecuteEvent $event) {
-        $this->events[] = $event;
-    }
-
-    /**
-     * @return \Composer\EventDispatcher\Event[]
-     */
-    public function getEvents()
-    {
-        return $this->events;
+        $this->assertEquals(new ExecutionResult(0, array('123')), $actualEvents[1]->getResult());
     }
 }
